@@ -1,7 +1,11 @@
 // Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
 
 func main() {
 	// Explain the rules
@@ -29,10 +33,13 @@ func main() {
 
 func parseInput(input string) []int {
 	var nums []int
-	for _, num := range input {
-		if num != ',' {
-			nums = append(nums, int(num-'0'))
+	for _, numStr := range strings.Split(input, ",") {
+		num, err := strconv.Atoi(numStr)
+		if err != nil {
+			fmt.Println("Invalid input, please enter integers separated by commas.")
+			continue
 		}
+		nums = append(nums, num)
 	}
 	return nums
 }
